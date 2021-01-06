@@ -1,15 +1,17 @@
 {
   "name": "arsenal",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/arsenal.ssr.js",
-  "browser": "dist/arsenal.esm.js",
+  "main": "dist/arsenal.csj.js",
+  "browser": "dist/arsenal.umd.js",
   "module": "dist/arsenal.esm.js",
   "unpkg": "dist/arsenal.min.js",
   "files": [
-    "dist/*",
-    "src/**/*.vue"
+    "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noDojo/arsenal.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve dev/serve.js",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
