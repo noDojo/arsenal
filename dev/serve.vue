@@ -1,6 +1,6 @@
 <script>
 import Vue from 'vue';
-import { ArsenalSample } from '@/entry';
+import { ArsenalSample } from '@/main';
 
 export default Vue.extend({
   name: 'ServeDev',

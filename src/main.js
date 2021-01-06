@@ -1,8 +1,8 @@
 // Import vue components
-import * as components from '@/lib-components/index';
+import * as components from '@/components/index';
 
 // install function executed by Vue.use()
-const install = function installArsenal(Vue) {
+const install = function install (Vue) {
   if (install.installed) return;
   install.installed = true;
   Object.entries(components).forEach(([componentName, component]) => {
@@ -20,11 +20,13 @@ const plugin = {
 /* global window, global */
 if ('false' === process.env.ES_BUILD) {
   let GlobalVue = null;
+
   if (typeof window !== 'undefined') {
     GlobalVue = window.Vue;
   } else if (typeof global !== 'undefined') {
     GlobalVue = global.Vue;
   }
+  
   if (GlobalVue) {
     GlobalVue.use(plugin);
   }
@@ -34,4 +36,4 @@ export default plugin;
 
 // To allow individual component use, export components
 // each can be registered via Vue.component()
-export * from '@/lib-components/index';
+export * from '@/components/index';

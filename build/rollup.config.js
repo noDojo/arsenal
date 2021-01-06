@@ -8,6 +8,7 @@ import replace from '@rollup/plugin-replace';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
+import pkg from '../package.json';
 
 // Get browserslist config and remove ie from es build targets
 const esbrowserslist = fs.readFileSync('./.browserslistrc')
@@ -20,11 +21,16 @@ const argv = minimist(process.argv.slice(2));
 const projectRoot = path.resolve(__dirname, '..');
 
 const baseConfig = {
-  input: 'src/entry.js',
+  input: 'src/main.js',
+  output: {
+    name: 'Arsenal',
+    file: pkg.browser,
+    format: 'umd'
+  },
   plugins: {
     preVue: [
       alias({
-        resolve: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+        resolve: ['.js', '.vue'],
         entries: {
           '@': path.resolve(projectRoot, 'src'),
         },
@@ -42,7 +48,7 @@ const baseConfig = {
     },
     babel: {
       exclude: 'node_modules/**',
-      extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+      extensions: ['.js', '.vue'],
     },
   },
 };
@@ -70,7 +76,7 @@ if (!argv.format || argv.format === 'es') {
     ...baseConfig,
     external,
     output: {
-      file: 'dist/arsenal.esm.js',
+      file: pkg.module,
       format: 'esm',
       exports: 'named',
     },
@@ -104,7 +110,7 @@ if (!argv.format || argv.format === 'cjs') {
     external,
     output: {
       compact: true,
-      file: 'dist/arsenal.ssr.js',
+      file: pkg.main,
       format: 'cjs',
       name: 'Arsenal',
       exports: 'named',
@@ -147,7 +153,7 @@ if (!argv.format || argv.format === 'iife') {
       commonjs(),
       terser({
         output: {
-          ecma: 5,
+          ecma: 6,
         },
       }),
     ],

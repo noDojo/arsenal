@@ -1,5 +1,5 @@
 {
-  "name": "arsenal",
+  "name": "@nodojo/arsenal",
   "version": "1.0.0",
   "main": "dist/arsenal.csj.js",
   "browser": "dist/arsenal.umd.js",
